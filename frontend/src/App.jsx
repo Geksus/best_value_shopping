@@ -1,27 +1,33 @@
 import './App.css'
-import { helloWorld } from "./api.js";
+import { fetchItems } from "./api.js";
 import { useEffect, useState } from "react";
+import ItemsList from "./items/ItemsList.jsx";
 
 function App() {
   const [data, setData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await helloWorld();
-        console.log(JSON.stringify(result));
+        setIsLoading(true);
+        const result = await fetchItems();
         setData(result);
       } catch (error) {
         console.error("Error fetching hello world:", error);
         setData("Error fetching data");
+      } finally {
+        setIsLoading(false);
       }
     }
-    fetchData();
+    if (!isLoading && data === "") {
+      fetchData();
+    }
   }, []);
 
   return (
     <>
-      <p>{JSON.stringify(data)}</p>
+      <ItemsList items={data} />
     </>
   );
 }
