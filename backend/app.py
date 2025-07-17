@@ -1,9 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 from flask_cors import CORS
 import requests
 from dotenv import load_dotenv
 import json
 from datetime import datetime, timedelta
+import io
 
 import os
 
@@ -16,12 +17,19 @@ user = os.getenv('DB_USER')
 password = os.getenv('DB_PASSWORD')
 host = os.getenv('DB_HOST')
 db_name = os.getenv('DB_NAME')
+img_url_prefix = os.getenv('IMG_URL_PREFIX')
+img_folder_path = os.getenv('IMG_FOLDER_PATH')
 
 app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
         "origins": "http://localhost:5173",  # Your React app's URL
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    },
+    r"/products/300x300/webp/*": {
+        "origins": "https://images.silpo.ua",
+        "methods": ["GET"],
         "allow_headers": ["Content-Type"]
     }
 })
@@ -83,6 +91,50 @@ def get_items():
     items = Item.query.all()
     return jsonify([item.to_dict() for item in items])
 
+@app.route('/item/<id>', methods=['GET'])
+def serve_image(id):
+    file_path = os.path.join(img_folder_path, id)
+
+    # If file doesn't exist, download it
+    if not os.path.exists(file_path):
+        os.makedirs(img_folder_path, exist_ok=True)
+        print(img_url_prefix + id)
+
+        try:
+            response = requests.get(img_url_prefix + id, stream=True)
+            response.raise_for_status()
+
+            with open(file_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+
+        except requests.exceptions.RequestException as e:
+            return jsonify({"error": "Download failed", "details": str(e)}), 500
+
+    # Serve the file
+    return send_file(file_path, mimetype='image/webp')
+
+@app.route('/proxy/image/<image_id>')
+def proxy_image(image_id):
+    try:
+        # Construct the full URL for the image
+        image_url = f'https://images.silpo.ua/products/300x300/webp/{image_id}'
+        print(image_url)
+        # Fetch the image
+        response = requests.get(image_url)
+        response.raise_for_status()  # Raise an exception for bad status codes
+        
+        # Create an in-memory file-like object
+        image_io = io.BytesIO(response.content)
+        
+        # Send the image with the correct MIME type
+        return send_file(
+            image_io,
+            mimetype='image/webp',
+            as_attachment=False
+        )
+    except requests.RequestException as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

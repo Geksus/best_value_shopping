@@ -1,0 +1,16 @@
+.itemCard {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: floralwhite;
+}
+
+.itemCard:hover {
+    background-color: ghostwhite;
+}
+
+.itemCardBody {
+    display: flex;
+}
