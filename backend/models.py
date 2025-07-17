@@ -39,3 +39,9 @@ class Item(db.Model):
     def __init__(self, **kwargs):
         for field in kwargs:
             setattr(self, field, kwargs[field])
+
+    def to_dict(self):
+        return {
+            column.name: getattr(self, column.name)
+            for column in self.__table__.columns
+        }
