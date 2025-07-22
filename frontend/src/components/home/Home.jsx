@@ -1,34 +1,41 @@
-import {fetchItems} from "../../api.js";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { fetchItems } from '../../api.js'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import './home.css'
 
 export default function Home() {
-    const [data, setData] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
 
     useEffect(() => {
         async function fetchData() {
             try {
-                setIsLoading(true);
-                const result = await fetchItems();
-                setData(result);
+                setIsLoading(true)
+                const result = await fetchItems()
+                setData(result)
             } catch (error) {
-                console.error("Error fetching hello world:", error);
-                setData("Error fetching data");
+                console.error('Error fetching hello world:', error)
+                setData('Error fetching data')
             } finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
         }
-        if (!isLoading && data === "") {
-            fetchData();
+        if (!isLoading && data === '') {
+            fetchData()
         }
-    }, []);
+    }, [])
 
     return (
         <>
-            <button onClick={() => navigate('/items')}>Start</button>
+            <button
+                className={isLoading ? 'startButtonLoading' : 'startButton'}
+                onClick={() => navigate('/items')}
+            >
+                {isLoading ? 'Loading...' : 'Start'}
+            </button>
         </>
-    );
+    )
 }

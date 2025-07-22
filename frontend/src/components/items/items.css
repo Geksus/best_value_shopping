@@ -1,3 +1,8 @@
+body {
+    display: inline-flex;
+    flex-direction: column;
+}
+
 .itemCard {
     border: 1px solid black;
     border-radius: 10px;
@@ -13,4 +18,20 @@
 
 .itemCardBody {
     display: flex;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.itemsList {
+    position: relative;
+    width: 50%;
+    align-items: center;
+}
+
+.categories {
+    margin-bottom: 1rem;
 }

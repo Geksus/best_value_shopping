@@ -1,15 +1,7 @@
 import './items.css'
-import path from 'path'
-import { useEffect } from 'react'
-import { fetchItemImage } from '../../api.js'
 
 export default function ItemCard({ item }) {
-    const saveFolderPath = import.meta.env.VITE_IMG_FOLDER_PATH
     const imgFetchUrl = import.meta.env.VITE_IMG_URL_PREFIX
-
-    useEffect(() => {
-        fetchItemImage(item.icon)
-    }, [])
 
     return (
         <>
@@ -17,10 +9,10 @@ export default function ItemCard({ item }) {
                 <div className="itemCardBody">
                     <div>
                         <img
-                            src={saveFolderPath + imgFetchUrl}
+                            src={imgFetchUrl + item.icon}
                             alt={item.displayRatio}
-                            width={50}
-                            height={50}
+                            width={150}
+                            height={150}
                         />
                     </div>
                     <div>
@@ -31,7 +23,7 @@ export default function ItemCard({ item }) {
                         </div>
                         <div>
                             <p>
-                                <span>Price: {item.displayPrice}</span>{' '}
+                                <span>Price: {item.price}</span>{' '}
                                 {item.oldPrice && (
                                     <>
                                         <span>
@@ -41,12 +33,10 @@ export default function ItemCard({ item }) {
                                             | Discount:{' '}
                                             {(
                                                 100 -
-                                                (item.displayPrice /
-                                                    item.oldPrice) *
+                                                (item.price / item.oldPrice) *
                                                     100
                                             ).toFixed(2)}
                                         </span>
-                                        <span>{JSON.stringify(item)}</span>
                                     </>
                                 )}
                             </p>

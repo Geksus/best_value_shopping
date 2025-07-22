@@ -1,0 +1,23 @@
+.startButton {
+    width: 10rem;
+    height: 5rem;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.startButtonLoading {
+    width: 10rem;
+    height: 5rem;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
