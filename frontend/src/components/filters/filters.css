@@ -1,53 +1,57 @@
 .categoryFilterList {
-    min-height: 3rem;
-    max-height: 15rem;
     width: 100vw;
-    background-color: burlywood;
-    display: inline-block;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 1rem;
     justify-content: left;
     align-items: center;
 }
 
-.categorySelector {
-    border-radius: 1rem;
-    margin: 1rem 1rem 1rem 1rem;
-
-}
-
 .filters {
-    border-right: 1px solid darkgray;
-    background-color: chocolate;
-    padding-left: 1rem;
-}
-
-.categoryItem {
-    border-radius: 1rem;
-    background-color: white;
+    background-color: gold;
+    padding: 0.5rem;
+    border-right: 1px solid brown;
     display: flex;
-    justify-content: space-between;
-    padding: 0 0.3rem 0 0.3rem;
+    gap: 1rem;
     align-items: center;
-    margin-left: 0.5rem;
 }
 
 .categoryItems {
     display: flex;
-    flex-direction: row;
-    padding: 0.5rem 0 0.5rem 0;
+    justify-content: left;
+    gap: 1rem;
+    font-size: 0.8rem;
+}
+
+.categoryItem {
+    display: flex;
+    border-radius: 8px;
+    border: 1px solid gold;
+}
+
+.categoryItemText {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 1rem;
+}
+
+.categoryItem:hover {
+    box-shadow: inset 2px -2px 1px rgba(255, 0, 0, 0.4);
 }
 
 .categoryItemButton {
-    background-color: red;
-    color: white;
-    height: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.3rem;
-    border-radius: 50%;
-    margin: 0 0.1rem 0 0.5rem;
+    border-radius: 0 8px 8px 0;
+    background-color: gold;
+    cursor: pointer;
 }
 
 .categoryItemButton:hover {
-    background-color: #1a1a1a;
+    background-color: red;
 }

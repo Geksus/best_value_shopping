@@ -1,14 +1,8 @@
-export default function CategoryItem({ name, value, removeFilterFromList }) {
+export default function CategoryItem({ name }) {
     return (
         <>
-            <div className="categoryItem">
+            <div>
                 <span>{name}</span>
-                <button
-                    className="categoryItemButton"
-                    onClick={() => removeFilterFromList(value)}
-                >
-                    X
-                </button>
             </div>
         </>
     )
