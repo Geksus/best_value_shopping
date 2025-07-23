@@ -40,6 +40,7 @@ export default function ItemCard({ item }) {
                                     </>
                                 )}
                             </p>
+                            <p>{item.sectionSlug}</p>
                         </div>
                     </div>
                 </div>

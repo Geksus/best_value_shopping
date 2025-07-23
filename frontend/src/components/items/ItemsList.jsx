@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { loadAllItems } from '../../api.js'
+import { fetchCategories, loadAllItems } from '../../api.js'
 import IsLoading from '../isLoading/IsLoading.jsx'
 import ItemCard from './ItemCard.jsx'
 import CategoryFilter from '../filters/CategoryFilter.jsx'
@@ -11,21 +11,36 @@ export default function ItemsList() {
     const [isLoading, setIsLoading] = useState(false)
     const [filteredCategories, setFilteredCategories] = useState([])
     const [discountRange, setDiscountRange] = useState(0)
+    const [categories, setCategories] = useState([])
+
+    async function fetchData() {
+        try {
+            setIsLoading(true)
+            const result = await loadAllItems()
+            setItems(result)
+            setFilteredItems(result)
+        } catch (error) {
+            console.error('Error getting data from DB', error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    async function fetchCurrentCategories() {
+        try {
+            setIsLoading(true)
+            const result = await fetchCategories()
+            setCategories(result)
+        } catch (error) {
+            console.error('Error getting data from DB', error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setIsLoading(true)
-                const result = await loadAllItems()
-                setItems(result)
-                setFilteredItems(result)
-            } catch (error) {
-                console.error('Error getting data from DB', error)
-            } finally {
-                setIsLoading(false)
-            }
-        }
         fetchData()
+        fetchCurrentCategories()
     }, [])
 
     function filterItemsByCategories() {
@@ -54,7 +69,6 @@ export default function ItemsList() {
     function removeFilterFromList(filter) {
         let data = filteredCategories.filter((f) => f !== filter)
         setFilteredCategories(data)
-        console.log(filteredCategories)
     }
 
     useEffect(() => {
@@ -71,6 +85,7 @@ export default function ItemsList() {
             <div className="container">
                 <div className="categories">
                     <CategoryFilter
+                        categories={categories}
                         filteredCategories={filteredCategories}
                         setFilteredCategories={setFilteredCategories}
                         setDiscountRange={setDiscountRange}
@@ -82,11 +97,9 @@ export default function ItemsList() {
                         ? filteredCategories.map((cat) => (
                               <ItemColumn
                                   key={cat}
-                                  items={filteredItems
-                                      .slice(0, 100)
-                                      .filter(
-                                          (item) => item.sectionSlug === cat
-                                      )}
+                                  items={filteredItems.filter(
+                                      (item) => item.sectionSlug === cat
+                                  )}
                               />
                           ))
                         : items

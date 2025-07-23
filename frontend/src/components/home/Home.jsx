@@ -12,6 +12,7 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchData() {
+            console.log('fetching data')
             try {
                 setIsLoading(true)
                 const result = await fetchItems()
@@ -23,7 +24,7 @@ export default function Home() {
                 setIsLoading(false)
             }
         }
-        if (!isLoading && data === '') {
+        if (!isLoading && data.length === 0) {
             fetchData()
         }
     }, [])

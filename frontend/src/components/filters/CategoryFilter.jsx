@@ -6,6 +6,7 @@ import './filters.css'
 import CategoryItemButton from './CategoryItemButton.jsx'
 
 export default function CategoryFilter({
+    categories,
     setFilteredCategories,
     setDiscountRange,
     filteredCategories,
@@ -18,6 +19,7 @@ export default function CategoryFilter({
                     <CategoryFilterList
                         setFilteredCategories={setFilteredCategories}
                         filteredCategories={filteredCategories}
+                        currentCategories={categories}
                     />
                     <DiscountFilter setDiscountRange={setDiscountRange} />
                 </div>
