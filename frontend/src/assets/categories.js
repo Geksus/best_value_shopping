@@ -57,7 +57,7 @@ const categories = {
     Грибна: 'grybna-4915',
     'Кава у стіках': 'kava-u-stikakh-5116',
     'Крем для тіла': 'krem-dlia-tila-4537',
-    Балык: 'balyk-4743',
+    Балик: 'balyk-4743',
     'Напівтверді, тенеро, вершковий, інші':
         'napivtverdi-tenero-vershkovyi-inshi-5013',
     'Крабові палички': 'krabovi-palychky-4438',
