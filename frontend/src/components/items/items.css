@@ -1,0 +1,37 @@
+body {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.itemCard {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: floralwhite;
+}
+
+.itemCard:hover {
+    background-color: ghostwhite;
+}
+
+.itemCardBody {
+    display: flex;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.itemsList {
+    position: relative;
+    width: 50%;
+    align-items: center;
+}
+
+.categories {
+    margin-bottom: 1rem;
+}

@@ -1,9 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 from flask_cors import CORS
 import requests
 from dotenv import load_dotenv
 import json
 from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import os
 
@@ -16,6 +17,8 @@ user = os.getenv('DB_USER')
 password = os.getenv('DB_PASSWORD')
 host = os.getenv('DB_HOST')
 db_name = os.getenv('DB_NAME')
+img_url_prefix = os.getenv('IMG_URL_PREFIX')
+img_folder_path = os.getenv('IMG_FOLDER_PATH')
 
 app = Flask(__name__)
 CORS(app, resources={
@@ -23,12 +26,36 @@ CORS(app, resources={
         "origins": "http://localhost:5173",  # Your React app's URL
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type"]
+    },
+    r"/products/300x300/webp/*": {
+        "origins": "https://images.silpo.ua",
+        "methods": ["GET"],
+        "allow_headers": ["Content-Type"]
     }
 })
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{user}:{password}@{host}:3306/{db_name}'
 
 db.init_app(app)
+
+def fetch_page(offset):
+    url = f'https://sf-ecom-api.silpo.ua/v1/uk/branches/1edb7347-7866-6c42-b1d6-11a6c487168c/products'
+    params = {
+        "limit": 100,
+        "deliveryType": "SelfPickup",
+        "sortBy": "popularity",
+        "sortDirection": "desc",
+        "mustHavePromotion": "false",
+        "inStock": "true",
+        "offset": offset
+    }
+    try:
+        resp = requests.get(url, params=params, timeout=10)
+        resp.raise_for_status()
+        return resp.json().get('items', [])
+    except Exception as e:
+        print(f"Error at offset {offset}: {e}")
+        return []
 
 @app.route('/')
 def hello():
@@ -44,11 +71,15 @@ def hello():
     json_data = data.json()
     total = json_data.get('total')
     items = []
-    for i in range(0, int(total), 100):
-        data = requests.get(f'https://sf-ecom-api.silpo.ua/v1/uk/branches/1edb7347-7866-6c42-b1d6-11a6c487168c/products?limit=100&deliveryType=SelfPickup&sortBy=popularity&sortDirection=desc&mustHavePromotion=false&inStock=true&offset={i}')
-        json_data = data.json()
-        items.extend(json_data.get('items'))
-        print(len(items))
+    offsets = range(0, int(total), 100)
+
+    print(f"Fetching {len(offsets)} pages in parallel...")
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = {executor.submit(fetch_page, offset): offset for offset in offsets}
+        for future in as_completed(futures):
+            items_batch = future.result()
+            items.extend(items_batch)
+            print(f"Fetched batch, total items so far: {len(items)}")
 
     # Store items in the database
     Item.query.delete()
@@ -82,7 +113,6 @@ def hello():
 def get_items():
     items = Item.query.all()
     return jsonify([item.to_dict() for item in items])
-
 
 if __name__ == '__main__':
     app.run(debug=True)

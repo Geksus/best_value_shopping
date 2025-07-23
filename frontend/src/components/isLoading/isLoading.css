@@ -1,0 +1,137 @@
+body {
+    height: 100vh;
+}
+
+.wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.loader {
+    position: relative;
+    width: 60vw;
+    height: 7vw;
+    display: flex;
+    align-items: center;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iNSAwIDcwIDIwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjEwIiByPSIxMCIgZmlsbD0iI2NjYyIvPjwvc3ZnPg==);
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 4.67vw;
+}
+
+.loader:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 7vw;
+    width: 100%;
+    background-color: white;
+    animation: cover-dots 6.66s linear infinite;
+}
+
+.chomper {
+    position: absolute;
+    top: 0;
+    width: 7vw;
+    height: 7vw;
+    box-sizing: border-box;
+    border-width: 3.5vw;
+    border-style: solid;
+    border-color: transparent transparent transparent yellow;
+    border-radius: 50%;
+    animation: move-x 6.66s linear infinite;
+}
+
+.chomper:before, 
+.chomper:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -3.5vw;
+    top: -3.5vw;
+    width: 7vw;
+    height: 7vw;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 3.5vw;
+    border-radius: 50%;
+    animation-duration: 0.333s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+}
+
+.chomper:before {
+    animation-name: chomp-top;
+    border-color: yellow transparent transparent yellow;
+    transform: rotate(45deg);
+}
+
+.chomper:after {
+    animation-name: chomp-bottom;
+    border-color: yellow transparent transparent yellow;
+    transform: rotate(225deg);
+}
+
+@keyframes chomp-top {
+    0%, 25%, 100% { transform: rotate(-20deg); }
+    35%, 65% { transform: rotate(45deg); }
+}
+
+@keyframes chomp-bottom {
+    0%, 25%, 100% { transform: rotate(-72deg); }
+    35%, 65% { transform: rotate(-137deg); }
+}
+
+@keyframes move-x {
+    0% {
+        transform: rotateY(0deg);
+        left: -7vw;
+    }
+    49.999% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+        left: 60vw;
+    }
+    70% {
+        left: -7vw;
+        transform: rotateY(180deg);
+    }
+    70.001% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        left: -7vw;
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes cover-dots {
+    0% {
+        opacity: 1;
+        width: 0;
+    }
+    50% {
+        width: 100%;
+    }
+    86% {
+        opacity: 1;
+    }
+    94% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        width: 100%;
+    }
+}
