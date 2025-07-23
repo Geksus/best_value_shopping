@@ -3,6 +3,7 @@ import DiscountFilter from './DiscountFilter.jsx'
 import CategoryItem from './CategoryItem.jsx'
 import reverseCategories from '../../assets/reverseCategories.js'
 import './filters.css'
+import CategoryItemButton from './CategoryItemButton.jsx'
 
 export default function CategoryFilter({
     setFilteredCategories,
@@ -23,12 +24,21 @@ export default function CategoryFilter({
                 <div className="categoryItems">
                     {filteredCategories.length > 0 &&
                         filteredCategories.map((cat) => (
-                            <CategoryItem
-                                key={cat}
-                                name={reverseCategories[cat]}
-                                value={cat}
-                                removeFilterFromList={removeFilterFromList}
-                            />
+                            <div className="categoryItem" key={cat}>
+                                <div className="categoryItemText">
+                                    <CategoryItem
+                                        name={reverseCategories[cat]}
+                                    />
+                                </div>
+                                <div className="categoryItemButton">
+                                    <CategoryItemButton
+                                        value={cat}
+                                        removeFilterFromList={
+                                            removeFilterFromList
+                                        }
+                                    />
+                                </div>
+                            </div>
                         ))}
                 </div>
             </div>

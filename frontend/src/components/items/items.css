@@ -1,37 +1,145 @@
-body {
-    display: inline-flex;
-    flex-direction: column;
-}
-
-.itemCard {
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-bottom: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-    background-color: floralwhite;
-}
-
-.itemCard:hover {
-    background-color: ghostwhite;
-}
-
-.itemCardBody {
-    display: flex;
-}
-
 .container {
+    width: 100vw;
+    min-height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
 }
 
 .itemsList {
-    position: relative;
-    width: 50%;
-    align-items: center;
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin: 2rem 0 1rem 0;
 }
 
-.categories {
+.itemColumn {
+    flex: 1;
+    min-width: 10vw;
+    max-width: 20vw;
+    max-height: 85vh; /* Adjust based on filter height */
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.itemCard {
     margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.itemCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.itemCard:last-child {
+    margin-bottom: 0;
+}
+
+.itemCardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.itemCardBody img {
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+    border-radius: 4px;
+    align-self: center;
+}
+
+.itemCardBody h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.3;
+}
+
+.itemCardBody p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.itemCardBody span {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .itemsList {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    .itemColumn {
+        min-width: 15vw;
+        padding: 0.25rem;
+    }
+    
+    .itemCard {
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .itemCardBody h3 {
+        font-size: 0.875rem;
+    }
+    
+    .itemCardBody p {
+        font-size: 0.75rem;
+    }
+}
+
+/* Scrollbar styling for webkit browsers */
+.itemColumn::-webkit-scrollbar {
+    width: 6px;
+}
+
+.itemColumn::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.itemColumn::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.itemColumn::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.itemsList::-webkit-scrollbar {
+    height: 8px;
+}
+
+.itemsList::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.itemsList::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.itemsList::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }

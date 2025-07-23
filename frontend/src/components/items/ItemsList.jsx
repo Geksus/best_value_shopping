@@ -3,6 +3,7 @@ import { loadAllItems } from '../../api.js'
 import IsLoading from '../isLoading/IsLoading.jsx'
 import ItemCard from './ItemCard.jsx'
 import CategoryFilter from '../filters/CategoryFilter.jsx'
+import ItemColumn from './itemColumn.jsx'
 
 export default function ItemsList() {
     const [items, setItems] = useState([])
@@ -78,11 +79,16 @@ export default function ItemsList() {
                 </div>
                 <div className="itemsList">
                     {filteredItems.length > 0
-                        ? filteredItems
-                              .slice(0, 10)
-                              .map((item) => (
-                                  <ItemCard key={item.id} item={item} />
-                              ))
+                        ? filteredCategories.map((cat) => (
+                              <ItemColumn
+                                  key={cat}
+                                  items={filteredItems
+                                      .slice(0, 100)
+                                      .filter(
+                                          (item) => item.sectionSlug === cat
+                                      )}
+                              />
+                          ))
                         : items
                               .slice(0, 10)
                               .map((item) => (
