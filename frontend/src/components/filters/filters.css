@@ -1,9 +1,9 @@
 .categoryFilterList {
     width: 100vw;
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 3rem; /* or whatever the header's total height is */
     left: 0;
-    z-index: 100;
+    z-index: 99; /* less than header's z-index */
     background-color: white;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

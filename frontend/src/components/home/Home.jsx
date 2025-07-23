@@ -30,13 +30,11 @@ export default function Home() {
     }, [])
 
     return (
-        <>
-            <button
-                className={isLoading ? 'startButtonLoading' : 'startButton'}
-                onClick={() => navigate('/items')}
-            >
-                {isLoading ? 'Loading...' : 'Start'}
-            </button>
-        </>
+        <button
+            className={isLoading ? 'startButtonLoading' : 'startButton'}
+            onClick={() => navigate('/items')}
+        >
+            {isLoading ? 'Loading...' : 'Start'}
+        </button>
     )
 }
