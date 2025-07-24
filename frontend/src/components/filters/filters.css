@@ -1,12 +1,12 @@
 .categoryFilterList {
     width: 100vw;
     position: fixed;
-    top: 3rem; /* or whatever the header's total height is */
+    top: 3rem;
     left: 0;
-    z-index: 99; /* less than header's z-index */
-    background-color: white;
+    z-index: 99;
+    background: linear-gradient(90deg, mediumblue 0%, gold 50%, mediumblue 100%);
     border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
     display: flex;
     gap: 1rem;
     justify-content: left;
@@ -14,12 +14,13 @@
 }
 
 .filters {
-    background-color: gold;
+    /*background-color: gold;*/
     padding: 0.5rem;
-    border-right: 1px solid brown;
+    /*border-right: 1px dotted mediumblue;*/
     display: flex;
     gap: 1rem;
     align-items: center;
+    color: floralwhite;
 }
 
 .categoryItems {
@@ -43,7 +44,7 @@
 }
 
 .categoryItem:hover {
-    box-shadow: inset 2px -2px 1px rgba(255, 0, 0, 0.4);
+    box-shadow: inset 2px -2px 1px mediumblue;
 }
 
 .categoryItemButton {
@@ -53,5 +54,8 @@
 }
 
 .categoryItemButton:hover {
-    background-color: red;
+    background: linear-gradient(90deg, gold 0%, mediumblue 100%);
+    color: floralwhite;
+    border: 0;
+    border-bottom: 1px solid mediumblue;
 }
