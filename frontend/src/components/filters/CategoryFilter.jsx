@@ -4,6 +4,7 @@ import CategoryItem from './CategoryItem.jsx'
 import reverseCategories from '../../assets/reverseCategories.js'
 import './filters.css'
 import CategoryItemButton from './CategoryItemButton.jsx'
+import Search from './Search.jsx'
 
 export default function CategoryFilter({
     categories,
@@ -11,6 +12,8 @@ export default function CategoryFilter({
     setDiscountRange,
     filteredCategories,
     removeFilterFromList,
+    searchField,
+    setSearchField,
 }) {
     return (
         <>
@@ -22,6 +25,10 @@ export default function CategoryFilter({
                         currentCategories={categories}
                     />
                     <DiscountFilter setDiscountRange={setDiscountRange} />
+                    <Search
+                        searchField={searchField}
+                        setSearchField={setSearchField}
+                    />
                 </div>
                 <div className="categoryItems">
                     {filteredCategories.length > 0 &&

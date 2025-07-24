@@ -1,9 +1,20 @@
 .container {
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     position: fixed;
-    top: 0;
+    top: 3rem;
     left: 0;
+    overflow-y: auto;
+}
+
+.itemGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10vw, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-bottom: 5rem;
 }
 
 .itemsList {
@@ -49,7 +60,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.itemCard:last-child {
+.itemColumn .itemCard:last-child {
     margin-bottom: 0;
 }
 

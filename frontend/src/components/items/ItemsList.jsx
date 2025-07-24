@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { fetchCategories, loadAllItems } from '../../api.js'
 import IsLoading from '../isLoading/IsLoading.jsx'
-import ItemCard from './ItemCard.jsx'
 import CategoryFilter from '../filters/CategoryFilter.jsx'
 import ItemColumn from './itemColumn.jsx'
+import ItemGrid from './ItemGrid.jsx'
+import Pagination from '../pagination/Pagination.jsx'
 
 export default function ItemsList() {
     const [items, setItems] = useState([])
@@ -12,6 +13,10 @@ export default function ItemsList() {
     const [filteredCategories, setFilteredCategories] = useState([])
     const [discountRange, setDiscountRange] = useState(0)
     const [categories, setCategories] = useState([])
+    const [searchField, setSearchField] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [itemsPerPage, setItemsPerPage] = useState(25)
+    const [totalPages, setTotalPages] = useState(0)
 
     async function fetchData() {
         try {
@@ -41,29 +46,55 @@ export default function ItemsList() {
     useEffect(() => {
         fetchData()
         fetchCurrentCategories()
+        setTotalPages(Math.ceil(filteredItems.length / itemsPerPage))
     }, [])
 
     function filterItemsByCategories() {
         let data = []
+
         if (filteredCategories.length > 0) {
             data = items.filter(
                 (item) =>
                     filteredCategories.includes(item.sectionSlug) &&
-                    100 - (parseInt(item.price) / item.oldPrice) * 100 >=
+                    item.title
+                        .toLowerCase()
+                        .includes(searchField.toLowerCase()) &&
+                    100 -
+                        (parseInt(item.price) / parseInt(item.oldPrice)) *
+                            100 >=
                         discountRange
             )
         } else {
-            data = items.filter(
-                (item) =>
-                    100 - (parseInt(item.price) / item.oldPrice) * 100 >=
-                    discountRange
-            )
+            // When no categories are selected
+            if (discountRange !== 0) {
+                data = items.filter(
+                    (item) =>
+                        item.title
+                            .toLowerCase()
+                            .includes(searchField.toLowerCase()) &&
+                        100 -
+                            (parseInt(item.price) / parseInt(item.oldPrice)) *
+                                100 >=
+                            discountRange
+                )
+                console.log(data)
+            } else {
+                if (searchField !== '') {
+                    data = items.filter((item) =>
+                        item.title
+                            .toLowerCase()
+                            .includes(searchField.toLowerCase())
+                    )
+                    console.log(data)
+                }
+                // No categories and no discount filter - show all items
+                else {
+                    data = items
+                }
+            }
         }
-        if (data?.length > 0) {
-            setFilteredItems(data)
-        } else {
-            setFilteredItems([])
-        }
+
+        setFilteredItems(data)
     }
 
     function removeFilterFromList(filter) {
@@ -71,13 +102,20 @@ export default function ItemsList() {
         setFilteredCategories(data)
     }
 
+    function calculateDataSlice() {
+        const indexOfLastItem = currentPage * itemsPerPage
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage
+
+        return [indexOfFirstItem, indexOfLastItem]
+    }
+
     useEffect(() => {
         filterItemsByCategories()
-    }, [filteredCategories, discountRange])
+    }, [filteredCategories, discountRange, searchField])
 
-    // console.log(items[0])
-    // console.log(filteredItems[0])
-    // console.log(discountRange)
+    useEffect(() => {
+        setTotalPages(Math.ceil(filteredItems.length / itemsPerPage))
+    }, [filteredItems, itemsPerPage])
 
     return (
         <>
@@ -90,10 +128,12 @@ export default function ItemsList() {
                         setFilteredCategories={setFilteredCategories}
                         setDiscountRange={setDiscountRange}
                         removeFilterFromList={removeFilterFromList}
+                        searchField={searchField}
+                        setSearchField={setSearchField}
                     />
                 </div>
                 <div className="itemsList">
-                    {filteredItems.length > 0
+                    {filteredItems.length > 0 && filteredCategories.length > 0
                         ? filteredCategories.map((cat) => (
                               <ItemColumn
                                   key={cat}
@@ -102,12 +142,24 @@ export default function ItemsList() {
                                   )}
                               />
                           ))
-                        : items
-                              .slice(0, 10)
-                              .map((item) => (
-                                  <ItemCard key={item.id} item={item} />
-                              ))}
+                        : filteredItems && (
+                              <ItemGrid
+                                  items={filteredItems?.slice(
+                                      calculateDataSlice()[0],
+                                      calculateDataSlice()[1]
+                                  )}
+                              />
+                          )}
                 </div>
+                {filteredItems.length > 0 && (
+                    <Pagination
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        itemsPerPage={itemsPerPage}
+                        setItemsPerPage={setItemsPerPage}
+                        totalPages={totalPages}
+                    />
+                )}
             </div>
         </>
     )

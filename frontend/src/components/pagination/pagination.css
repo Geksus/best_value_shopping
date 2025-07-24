@@ -1,0 +1,83 @@
+.pagination {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    background: linear-gradient(90deg, mediumblue 0%, gold 50%, mediumblue 100%);
+}
+
+.paginationSelectContainer {
+    color: black;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.paginationSelect {
+    background-color: floralwhite;
+    opacity: 0.75;
+    color: black;
+    border: 1px solid black;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.2rem;
+}
+
+.paginationSelect option {
+    background-color: goldenrod;
+}
+
+.paginationButtons {
+    color: black;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.paginationButton {
+    border-radius: 0;
+    border: 0;
+    border-right: 1px dotted mediumblue;
+    background-color: cornflowerblue;
+    opacity: 0.75;
+    color: white;
+    cursor: pointer;
+    width: 5rem;
+
+    transition: background-color 0.5s;
+}
+
+.paginationButton:last-child {
+    border-right: none;
+}
+
+.paginationButtonActive:hover {
+    background-color: gold;
+    color: mediumblue;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 1px dotted mediumblue;
+}
+
+.paginationButtonCurrent {
+    background: floralwhite;
+    opacity: 1;
+    border: 0;
+    border-right: 1px dotted mediumblue;
+    color: mediumblue;
+}
+
+.paginationButtonInactive {
+    background-color: lightgray;
+    border: 0;
+    border-right: 1px dotted mediumblue;
+    color: darkred;
+}
+
+.paginationButtonLong {
+    width: 8rem;
+}
