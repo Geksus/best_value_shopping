@@ -1,4 +1,5 @@
 import './items.css'
+import reverseCategories from '../../assets/reverseCategories.js'
 
 export default function ItemCard({ item }) {
     const imgFetchUrl = import.meta.env.VITE_IMG_URL_PREFIX
@@ -37,10 +38,10 @@ export default function ItemCard({ item }) {
                                                     100
                                             ).toFixed(2)}
                                         </span>
+                                        <span>{item.sectionSlug}</span>
                                     </>
                                 )}
                             </p>
-                            <p>{item.sectionSlug}</p>
                         </div>
                     </div>
                 </div>
