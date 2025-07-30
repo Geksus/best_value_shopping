@@ -2,7 +2,7 @@ import CategoryFilterList from './CategoryFilterList.jsx'
 import DiscountFilter from './DiscountFilter.jsx'
 import CategoryItem from './CategoryItem.jsx'
 import reverseCategories from '../../assets/reverseCategories.js'
-import './filters.css'
+import '../../styles/filters.css'
 import CategoryItemButton from './CategoryItemButton.jsx'
 import Search from './Search.jsx'
 

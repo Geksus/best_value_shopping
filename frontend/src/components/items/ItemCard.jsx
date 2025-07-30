@@ -1,49 +1,66 @@
-import './items.css'
+import '../../styles/items.css'
 import reverseCategories from '../../assets/reverseCategories.js'
 
 export default function ItemCard({ item }) {
     const imgFetchUrl = import.meta.env.VITE_IMG_URL_PREFIX
 
+    function calculatePricePerRatio(price, ratio) {
+        if (ratio.endsWith('кг')) {
+            return (price / ratio.slice(0, -2)).toFixed(2)
+        }
+        if (ratio.endsWith('г')) {
+            return (price / (ratio.slice(0, -1) / 1000)).toFixed(2)
+        }
+        return null
+    }
+
     return (
         <>
             <div className="itemCard">
                 <div className="itemCardBody">
-                    <div>
+                    <div className="itemCard-top">
                         <img
                             src={imgFetchUrl + item.icon}
-                            alt={item.displayRatio}
-                            width={150}
-                            height={150}
+                            alt={item.title}
+                            width={100}
+                            height={100}
                         />
-                    </div>
-                    <div>
-                        <div>
-                            <h3>
-                                {item.title} - {item.displayRatio}
-                            </h3>
+                        <div className="itemCard-discount">
+                            {item.oldPrice && (
+                                <>
+                                    <span>
+                                        {(
+                                            100 -
+                                            (item.price / item.oldPrice) * 100
+                                        ).toFixed(2)}
+                                        %
+                                    </span>
+                                </>
+                            )}
                         </div>
-                        <div>
+                    </div>
+                    <div className="itemCard-bottom">
+                        <h4>
+                            {item.title} - {item.displayRatio}
+                        </h4>
+                        <p className="item-price">Price: {item.price}</p>
+                        <p className="item-price">Old price: {item.oldPrice}</p>
+                        {calculatePricePerRatio(
+                            item.price,
+                            item.displayRatio
+                        ) && (
                             <p>
-                                <span>Price: {item.price}</span>{' '}
-                                {item.oldPrice && (
-                                    <>
-                                        <span>
-                                            | Old price: {item.oldPrice}{' '}
-                                        </span>
-                                        <span>
-                                            | Discount:{' '}
-                                            {(
-                                                100 -
-                                                (item.price / item.oldPrice) *
-                                                    100
-                                            ).toFixed(2)}
-                                        </span>
-                                    </>
+                                Price per kg:{' '}
+                                {calculatePricePerRatio(
+                                    item.price,
+                                    item.displayRatio
                                 )}
-                                <span>{item.sectionSlug}</span>
                             </p>
-                        </div>
+                        )}
                     </div>
+                </div>
+                <div className="item-card-footer">
+                    <p>{reverseCategories[item.sectionSlug]}</p>
                 </div>
             </div>
         </>
