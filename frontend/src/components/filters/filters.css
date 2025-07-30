@@ -4,9 +4,7 @@
     top: 3rem;
     left: 0;
     z-index: 99;
-    background: linear-gradient(90deg, mediumblue 0%, gold 50%, mediumblue 100%);
-    border-bottom: 1px solid #e0e0e0;
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    background: linear-gradient(90deg, #1a1a1a 0%, gold 50%, #1a1a1a 100%);
     display: flex;
     gap: 1rem;
     justify-content: left;
@@ -14,9 +12,7 @@
 }
 
 .filters {
-    /*background-color: gold;*/
     padding: 0.5rem;
-    /*border-right: 1px dotted mediumblue;*/
     display: flex;
     gap: 1rem;
     align-items: center;

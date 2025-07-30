@@ -10,6 +10,15 @@ export default function Home() {
 
     const navigate = useNavigate()
 
+    const tilesPerRow = Math.ceil(window.innerWidth / 100)
+    const tilesPerColumn = Math.ceil(window.innerHeight / 100)
+    const totalTiles = tilesPerRow * tilesPerColumn
+
+    // Generate array of tiles
+    const tiles = Array.from({ length: totalTiles }, (_, index) => (
+        <div key={index} className="grid-tile"></div>
+    ))
+
     useEffect(() => {
         async function fetchData() {
             console.log('fetching data')
@@ -30,11 +39,14 @@ export default function Home() {
     }, [])
 
     return (
-        <button
-            className={isLoading ? 'startButtonLoading' : 'startButton'}
-            onClick={() => navigate('/items')}
-        >
-            {isLoading ? 'Loading...' : 'Start'}
-        </button>
+        <div className="home-container">
+            <div className="home-background">{tiles}</div>
+            <button
+                className={isLoading ? 'startButtonLoading' : 'startButton'}
+                onClick={() => navigate('/items')}
+            >
+                {isLoading ? 'Loading...' : 'Start'}
+            </button>
+        </div>
     )
 }

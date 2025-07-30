@@ -13,7 +13,7 @@ export default function ItemsList() {
     const [filteredCategories, setFilteredCategories] = useState([])
     const [discountRange, setDiscountRange] = useState(0)
     const [categories, setCategories] = useState([])
-    const [searchField, setSearchField] = useState('')
+    const [searchField, setSearchField] = useState(' ')
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(25)
     const [totalPages, setTotalPages] = useState(0)
@@ -51,6 +51,7 @@ export default function ItemsList() {
 
     function filterItemsByCategories() {
         let data = []
+        console.log(filteredCategories)
 
         if (filteredCategories.length > 0) {
             data = items.filter(
@@ -79,7 +80,7 @@ export default function ItemsList() {
                 )
                 console.log(data)
             } else {
-                if (searchField !== '') {
+                if (searchField.length >= 3) {
                     data = items.filter((item) =>
                         item.title
                             .toLowerCase()

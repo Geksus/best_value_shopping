@@ -38,9 +38,9 @@ export default function ItemCard({ item }) {
                                                     100
                                             ).toFixed(2)}
                                         </span>
-                                        <span>{item.sectionSlug}</span>
                                     </>
                                 )}
+                                <span>{item.sectionSlug}</span>
                             </p>
                         </div>
                     </div>

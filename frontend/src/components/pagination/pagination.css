@@ -4,7 +4,7 @@
     display: flex;
     width: 100vw;
     justify-content: center;
-    background: linear-gradient(90deg, mediumblue 0%, gold 50%, mediumblue 100%);
+    background: linear-gradient(90deg, #1a1a1a 0%, gold 50%, #1a1a1a 100%);
 }
 
 .paginationSelectContainer {
@@ -41,7 +41,7 @@
     border-radius: 0;
     border: 0;
     border-right: 1px dotted mediumblue;
-    background-color: cornflowerblue;
+    background-color: #213547;
     opacity: 0.75;
     color: white;
     cursor: pointer;

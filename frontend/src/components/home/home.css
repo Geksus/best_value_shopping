@@ -5,13 +5,15 @@
     transform: translate(-50%, -50%);
     width: 10rem;
     height: 5rem;
-    background-color: green;
-    color: white;
+    background-color: #213547;
+    filter: drop-shadow(0 0 0.5rem black);
+    color: darkgoldenrod;
     font-weight: bold;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10; /* Ensure button stays on top of the grid */
 }
 
 .startButtonLoading {
@@ -21,11 +23,73 @@
     transform: translate(-50%, -50%);
     width: 10rem;
     height: 5rem;
-    background-color: red;
-    color: white;
+    background-color: darkred;
+    filter: drop-shadow(0 0 0.5rem black);
+    color: darkgoldenrod;
     font-weight: bold;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10; /* Ensure button stays on top of the grid */
+}
+
+.home-container {
+    background-color: black;
+    height: 100vh;
+    width: calc(100vw + 500px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.home-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    background-color: red;
+    animation: moveDown 10s linear infinite;
+    filter: blur(1000px);
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(-1000px);
+    }
+    100% {
+        transform: translateY(calc(100vh + 500px));
+    }
+}
+
+
+.home-background {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-rows: repeat(auto-fill, 100px);
+    width: calc(100vw + 100px);
+    height: calc(100vh + 100px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    gap: 4px;
+}
+
+
+.grid-tile {
+    width: 100px;
+    height: 100px;
+    background-color: #1a1a1a;
+
+    transition: 1.5s;
+}
+
+.grid-tile:hover {
+    background-color: firebrick;
+    transition: background-color 0s;
+    filter: blur(3px);
 }
