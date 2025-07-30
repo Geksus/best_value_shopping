@@ -51,13 +51,6 @@ export default function ItemsList() {
 
     function filterItemsByCategories() {
         let data = []
-        console.log(
-            items.filter(
-                (item) =>
-                    filteredCategories.includes(item.sectionSlug) &&
-                    item.title.toLowerCase().includes(searchField.toLowerCase())
-            )
-        )
 
         if (filteredCategories.length > 0) {
             data = items.filter(

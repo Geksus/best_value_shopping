@@ -1,5 +1,6 @@
 import '../../styles/items.css'
 import reverseCategories from '../../assets/reverseCategories.js'
+import { addToWishlist } from '../../api.js'
 
 export default function ItemCard({ item }) {
     const imgFetchUrl = import.meta.env.VITE_IMG_URL_PREFIX
@@ -14,9 +15,13 @@ export default function ItemCard({ item }) {
         return null
     }
 
+    async function toWishlist(id) {
+        return await addToWishlist({ id })
+    }
+
     return (
         <>
-            <div className="itemCard">
+            <div className="itemCard" onClick={() => toWishlist(item.id)}>
                 <div className="itemCardBody">
                     <div className="itemCard-top">
                         <img

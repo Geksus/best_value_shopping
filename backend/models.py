@@ -2,7 +2,7 @@ from db import db
 
 
 class Item(db.Model):
-    __tablename__ = 'items'
+    __tablename__ = "items"
 
     id = db.Column(db.String(64), primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -43,6 +43,21 @@ class Item(db.Model):
 
     def to_dict(self):
         return {
-            column.name: getattr(self, column.name)
-            for column in self.__table__.columns
+            column.name: getattr(self, column.name) for column in self.__table__.columns
+        }
+
+
+class WishlistItem(db.Model):
+    __tablename__ = "wishlist"
+
+    id = db.Column(db.String(64), primary_key=True)
+    item_id = db.Column(db.String(64), foreign_key="items.id", nullable=False)
+
+    def __init__(self, **kwargs):
+        for field in kwargs:
+            setattr(self, field, kwargs[field])
+
+    def to_dict(self):
+        return {
+            column.name: getattr(self, column.name) for column in self.__table__.columns
         }
