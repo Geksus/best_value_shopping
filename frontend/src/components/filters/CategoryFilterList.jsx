@@ -1,5 +1,5 @@
 import reverseCategories from '../../assets/reverseCategories.js'
-import './filters.css'
+import '../../styles/filters.css'
 import { useState } from 'react'
 
 export default function CategoryFilterList({

@@ -2,7 +2,7 @@ import { fetchItems } from '../../api.js'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import './home.css'
+import '../../styles/home.css'
 
 export default function Home() {
     const [data, setData] = useState([])

@@ -1,5 +1,5 @@
 import ItemCard from './ItemCard.jsx'
-import './items.css'
+import '../../styles/items.css'
 
 export default function ItemGrid({ items }) {
     return (
