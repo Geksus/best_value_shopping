@@ -90,6 +90,19 @@
 
 .grid-tile:hover {
     background-color: firebrick;
-    transition: background-color 0s;
-    filter: blur(3px);
+    filter: blur(5px);
+    transition: 0s;
+    animation: beat 3s linear infinite;
+}
+
+@keyframes beat {
+    0% {
+        filter: blur(0px);
+    }
+    50% {
+        filter: blur(5px);
+    }
+    100% {
+        filter: blur(0px);
+    }
 }
