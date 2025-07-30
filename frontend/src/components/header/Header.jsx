@@ -9,7 +9,7 @@ export default function Header() {
             <button onClick={() => navigate('/items')}>Items</button>
             <button onClick={() => navigate('/recipes')}>Recipes</button>
             <button onClick={() => navigate('/recipes')}>Add Recipe</button>
-            <button onClick={() => navigate('/recipes')}>Want to buy</button>
+            <button onClick={() => navigate('/wishlist')}>Want to buy</button>
         </div>
     )
 }
