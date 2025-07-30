@@ -10,14 +10,14 @@
   top: 0;
   left: 0;
   z-index: 100;
-  /*box-shadow: 0 2px 8px rgba(0,0,0,0.1);*/
+
 }
 
 .header button {
   width: 10vw;
   border-radius: 0;
   border: 0;
-  border-right: 1px dotted mediumblue;
+  border-right: 1px dotted #1a1a1a;
   background: #213547;
   opacity: 0.75;
   color: white;
@@ -30,10 +30,18 @@
   transition: background 0.2s, margin 0.5s;
 }
 
+.header button:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.header button:last-child {
+  border-bottom-right-radius: 8px;
+}
+
 .header button:hover {
   background: gold;
   border: none;
-  color: mediumblue;
+  color: #1a1a1a;
   margin-right: 2rem;
   margin-left: 2rem;
 }

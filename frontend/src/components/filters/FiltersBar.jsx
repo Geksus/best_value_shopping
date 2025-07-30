@@ -6,15 +6,22 @@ import '../../styles/filters.css'
 import CategoryItemButton from './CategoryItemButton.jsx'
 import Search from './Search.jsx'
 
-export default function CategoryFilter({
+export default function FiltersBar({
     categories,
     setFilteredCategories,
+    discountRange,
     setDiscountRange,
     filteredCategories,
     removeFilterFromList,
     searchField,
     setSearchField,
 }) {
+    function handleClearFilters() {
+        setFilteredCategories([])
+        setDiscountRange(0)
+        setSearchField('')
+    }
+
     return (
         <>
             <div className="categoryFilterList">
@@ -24,11 +31,22 @@ export default function CategoryFilter({
                         filteredCategories={filteredCategories}
                         currentCategories={categories}
                     />
-                    <DiscountFilter setDiscountRange={setDiscountRange} />
+                    <DiscountFilter
+                        discountRange={discountRange}
+                        setDiscountRange={setDiscountRange}
+                    />
                     <Search
                         searchField={searchField}
                         setSearchField={setSearchField}
                     />
+                    {filteredCategories.length > 0 && (
+                        <button
+                            className="clearFiltersButton"
+                            onClick={() => handleClearFilters()}
+                        >
+                            Clear
+                        </button>
+                    )}
                 </div>
                 <div className="categoryItems">
                     {filteredCategories.length > 0 &&

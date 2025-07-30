@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchCategories, loadAllItems } from '../../api.js'
 import IsLoading from '../isLoading/IsLoading.jsx'
-import CategoryFilter from '../filters/CategoryFilter.jsx'
+import FiltersBar from '../filters/FiltersBar.jsx'
 import ItemColumn from './itemColumn.jsx'
 import ItemGrid from './ItemGrid.jsx'
 import Pagination from '../pagination/Pagination.jsx'
@@ -13,7 +13,7 @@ export default function ItemsList() {
     const [filteredCategories, setFilteredCategories] = useState([])
     const [discountRange, setDiscountRange] = useState(0)
     const [categories, setCategories] = useState([])
-    const [searchField, setSearchField] = useState(' ')
+    const [searchField, setSearchField] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(25)
     const [totalPages, setTotalPages] = useState(0)
@@ -51,7 +51,13 @@ export default function ItemsList() {
 
     function filterItemsByCategories() {
         let data = []
-        console.log(filteredCategories)
+        console.log(
+            items.filter(
+                (item) =>
+                    filteredCategories.includes(item.sectionSlug) &&
+                    item.title.toLowerCase().includes(searchField.toLowerCase())
+            )
+        )
 
         if (filteredCategories.length > 0) {
             data = items.filter(
@@ -60,10 +66,7 @@ export default function ItemsList() {
                     item.title
                         .toLowerCase()
                         .includes(searchField.toLowerCase()) &&
-                    100 -
-                        (parseInt(item.price) / parseInt(item.oldPrice)) *
-                            100 >=
-                        discountRange
+                    Math.abs(item.discount) >= discountRange
             )
         } else {
             // When no categories are selected
@@ -73,12 +76,8 @@ export default function ItemsList() {
                         item.title
                             .toLowerCase()
                             .includes(searchField.toLowerCase()) &&
-                        100 -
-                            (parseInt(item.price) / parseInt(item.oldPrice)) *
-                                100 >=
-                            discountRange
+                        Math.abs(item.discount) >= discountRange
                 )
-                console.log(data)
             } else {
                 if (searchField.length >= 3) {
                     data = items.filter((item) =>
@@ -123,10 +122,11 @@ export default function ItemsList() {
             {isLoading && <IsLoading />}
             <div className="container">
                 <div className="categories">
-                    <CategoryFilter
+                    <FiltersBar
                         categories={categories}
                         filteredCategories={filteredCategories}
                         setFilteredCategories={setFilteredCategories}
+                        discountRange={discountRange}
                         setDiscountRange={setDiscountRange}
                         removeFilterFromList={removeFilterFromList}
                         searchField={searchField}

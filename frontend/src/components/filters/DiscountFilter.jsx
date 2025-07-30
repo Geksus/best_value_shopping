@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function DiscountFilter({ setDiscountRange }) {
+export default function DiscountFilter({ discountRange, setDiscountRange }) {
     const [discount, setDiscount] = useState(0)
 
     function changeDiscount(val) {
@@ -15,8 +15,8 @@ export default function DiscountFilter({ setDiscountRange }) {
         <>
             <span>Discount</span>
             <select
-                className="categorySelector"
-                value={discount}
+                className="discountSelector"
+                value={discountRange}
                 onChange={(event) =>
                     changeDiscount(parseInt(event.target.value))
                 }

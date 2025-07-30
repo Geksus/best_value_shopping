@@ -37,6 +37,14 @@
     padding: 0.5rem;
 }
 
+.paginationButtons .paginationButton:first-child {
+    border-top-left-radius: 8px;
+}
+
+.paginationButtons .paginationButton:last-child {
+    border-top-right-radius: 8px;
+}
+
 .paginationButton {
     border-radius: 0;
     border: 0;
