@@ -102,7 +102,27 @@
 .itemCard:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: pink;
 }
+
+.itemCard:hover::before {
+    content: "Add to cart";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    z-index: 10;
+    opacity: 1;
+}
+
 
 .itemColumn .itemCard:last-child {
     margin-bottom: 0;

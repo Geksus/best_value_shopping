@@ -109,6 +109,14 @@ def hello():
             for k in item_fields
         }
         filtered['added_at'] = current_time
+        filtered['discount'] = 0
+        try:
+            filtered['discount'] = round((item.get('price') - item.get('oldPrice')) / item.get('oldPrice') * 100, 2)
+        except AttributeError:
+            filtered['discount'] = 0
+        except TypeError:
+            filtered['discount'] = 0
+
         new_items.append(Item(**filtered))
 
         if i % 500 == 0:

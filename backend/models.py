@@ -35,6 +35,7 @@ class Item(db.Model):
     blurForUnderAged = db.Column(db.Boolean)
     modifier = db.Column(db.Text)
     added_at = db.Column(db.DateTime)
+    discount = db.Column(db.Float)
 
     def __init__(self, **kwargs):
         for field in kwargs:

@@ -43,6 +43,7 @@ export default function CategoryFilterList({
                     )}
             </select>
             <input
+                className="search"
                 type="text"
                 placeholder="Search"
                 value={search}

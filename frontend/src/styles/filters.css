@@ -22,7 +22,7 @@
 .categoryItems {
     display: flex;
     justify-content: left;
-    gap: 1rem;
+    flex-wrap: wrap;
     font-size: 0.8rem;
 }
 
@@ -30,6 +30,9 @@
     display: flex;
     border-radius: 8px;
     border: 1px solid gold;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    margin-right: 0.3rem;
 }
 
 .categoryItemText {
@@ -40,7 +43,7 @@
 }
 
 .categoryItem:hover {
-    box-shadow: inset 2px -2px 1px mediumblue;
+    box-shadow: inset 2px -2px 1px #1a1a1a;
 }
 
 .categoryItemButton {
@@ -50,8 +53,66 @@
 }
 
 .categoryItemButton:hover {
-    background: linear-gradient(90deg, gold 0%, mediumblue 100%);
+    background: linear-gradient(90deg, gold 0%, #1a1a1a 100%);
     color: floralwhite;
     border: 0;
-    border-bottom: 1px solid mediumblue;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.clearFiltersButton {
+    background-color: gold;
+    cursor: pointer;
+    border-radius: 8px;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    animation: blink 5s infinite;
+}
+
+.categorySelector {
+    border-radius: 8px;
+    width: 17rem;
+    background-color: transparent;
+    color: white;
+}
+
+.categorySelector option {
+    background-color: #ad820a;
+}
+
+.discountSelector {
+    border-radius: 8px;
+    width: 5rem;
+    background-color: transparent;
+    color: white;
+}
+
+.discountSelector option {
+    background-color: #ad820a;
+}
+
+.search {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+.search::placeholder {
+    color: white;
+}
+
+@keyframes blink {
+    0% {
+        background-color: gold;
+        color: #1a1a1a;
+    }
+    50% {
+        background-color: #1a1a1a;
+        color: gold;
+    }
+    100% {
+        background-color: gold;
+        color: #1a1a1a;
+    }
 }

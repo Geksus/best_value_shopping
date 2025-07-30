@@ -25,19 +25,11 @@ export default function ItemCard({ item }) {
                             width={100}
                             height={100}
                         />
-                        <div className="itemCard-discount">
-                            {item.oldPrice && (
-                                <>
-                                    <span>
-                                        {(
-                                            100 -
-                                            (item.price / item.oldPrice) * 100
-                                        ).toFixed(2)}
-                                        %
-                                    </span>
-                                </>
-                            )}
-                        </div>
+                        {item.oldPrice && (
+                            <div className="itemCard-discount">
+                                <span>{item.discount}%</span>
+                            </div>
+                        )}
                     </div>
                     <div className="itemCard-bottom">
                         <h4>
