@@ -16,7 +16,7 @@ export default function ItemCard({ item }) {
     }
 
     async function toWishlist(id) {
-        return await addToWishlist({ id })
+        return await addToWishlist(id)
     }
 
     return (
@@ -43,13 +43,13 @@ export default function ItemCard({ item }) {
                         <p className="item-price">Price: {item.price}</p>
                         <p className="item-price">Old price: {item.oldPrice}</p>
                         {calculatePricePerRatio(
-                            item.price,
+                            item.displayPrice,
                             item.displayRatio
                         ) && (
                             <p>
                                 Price per kg:{' '}
                                 {calculatePricePerRatio(
-                                    item.price,
+                                    item.displayPrice,
                                     item.displayRatio
                                 )}
                             </p>

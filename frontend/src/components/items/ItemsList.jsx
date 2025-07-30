@@ -78,7 +78,6 @@ export default function ItemsList() {
                             .toLowerCase()
                             .includes(searchField.toLowerCase())
                     )
-                    console.log(data)
                 }
                 // No categories and no discount filter - show all items
                 else {

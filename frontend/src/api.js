@@ -23,7 +23,7 @@ export async function fetchWishlist() {
 }
 
 export async function addToWishlist(id) {
-    const response = await axios.post(`${API_URL}/wishlist/${id.id}`, { id })
+    const response = await axios.post(`${API_URL}/wishlist/${id}`, { id })
     return response.status
 }
 
