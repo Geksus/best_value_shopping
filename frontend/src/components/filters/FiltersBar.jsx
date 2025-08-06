@@ -5,6 +5,7 @@ import reverseCategories from '../../assets/reverseCategories.js'
 import '../../styles/filters.css'
 import CategoryItemButton from './CategoryItemButton.jsx'
 import Search from './Search.jsx'
+import Sorter from './Sorter.jsx'
 
 export default function FiltersBar({
     categories,
@@ -15,6 +16,10 @@ export default function FiltersBar({
     removeFilterFromList,
     searchField,
     setSearchField,
+    priceSorting,
+    setPriceSorting,
+    discountSorting,
+    setDiscountSorting,
 }) {
     function handleClearFilters() {
         setFilteredCategories([])
@@ -26,6 +31,12 @@ export default function FiltersBar({
         <>
             <div className="categoryFilterList">
                 <div className="filters">
+                    <Sorter
+                        setDiscountSorting={setDiscountSorting}
+                        priceSorting={priceSorting}
+                        setPriceSorting={setPriceSorting}
+                        discountSorting={discountSorting}
+                    />
                     <CategoryFilterList
                         setFilteredCategories={setFilteredCategories}
                         filteredCategories={filteredCategories}

@@ -17,8 +17,8 @@ export default function ItemsList() {
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(25)
     const [totalPages, setTotalPages] = useState(0)
-    const [priceSorting, setPriceSorting] = useState('asc')
-    const [discountSorting, setDiscountSorting] = useState('')
+    const [priceSorting, setPriceSorting] = useState('-')
+    const [discountSorting, setDiscountSorting] = useState('-')
 
     async function fetchData() {
         try {
@@ -131,6 +131,10 @@ export default function ItemsList() {
                         removeFilterFromList={removeFilterFromList}
                         searchField={searchField}
                         setSearchField={setSearchField}
+                        priceSorting={priceSorting}
+                        setPriceSorting={setPriceSorting}
+                        discountSorting={discountSorting}
+                        setDiscountSorting={setDiscountSorting}
                     />
                 </div>
                 <div className="itemsList">
