@@ -51,7 +51,11 @@ class WishlistItem(db.Model):
     __tablename__ = "wishlist"
 
     id = db.Column(db.String(64), primary_key=True)
-    item_id = db.Column(db.String(64), foreign_key="items.id", nullable=False)
+    item_id = db.Column(
+        db.String(64),
+        db.ForeignKey("items.id", ondelete='CASCADE'),
+        nullable=False
+    )
 
     def __init__(self, **kwargs):
         for field in kwargs:
@@ -61,3 +65,4 @@ class WishlistItem(db.Model):
         return {
             column.name: getattr(self, column.name) for column in self.__table__.columns
         }
+

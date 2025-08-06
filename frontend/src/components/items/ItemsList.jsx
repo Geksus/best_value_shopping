@@ -17,6 +17,8 @@ export default function ItemsList() {
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(25)
     const [totalPages, setTotalPages] = useState(0)
+    const [priceSorting, setPriceSorting] = useState('-')
+    const [discountSorting, setDiscountSorting] = useState('-')
 
     async function fetchData() {
         try {
@@ -103,7 +105,13 @@ export default function ItemsList() {
 
     useEffect(() => {
         filterItemsByCategories()
-    }, [filteredCategories, discountRange, searchField])
+    }, [
+        filteredCategories,
+        discountRange,
+        searchField,
+        priceSorting,
+        discountSorting,
+    ])
 
     useEffect(() => {
         setTotalPages(Math.ceil(filteredItems.length / itemsPerPage))
@@ -123,6 +131,10 @@ export default function ItemsList() {
                         removeFilterFromList={removeFilterFromList}
                         searchField={searchField}
                         setSearchField={setSearchField}
+                        priceSorting={priceSorting}
+                        setPriceSorting={setPriceSorting}
+                        discountSorting={discountSorting}
+                        setDiscountSorting={setDiscountSorting}
                     />
                 </div>
                 <div className="itemsList">
@@ -133,6 +145,8 @@ export default function ItemsList() {
                                   items={filteredItems.filter(
                                       (item) => item.sectionSlug === cat
                                   )}
+                                  priceSorting={priceSorting}
+                                  discountSorting={discountSorting}
                               />
                           ))
                         : filteredItems && (
