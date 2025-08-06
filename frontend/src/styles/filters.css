@@ -4,7 +4,7 @@
     top: 3rem;
     left: 0;
     z-index: 99;
-    background: linear-gradient(90deg, #1a1a1a 0%, gold 50%, #1a1a1a 100%);
+    background: linear-gradient(90deg, #133453 0%, #489075 50%, #133453 100%);
     display: flex;
     gap: 1rem;
     justify-content: left;
@@ -29,7 +29,7 @@
 .categoryItem {
     display: flex;
     border-radius: 8px;
-    border: 1px solid gold;
+    border: 1px solid #BFD5CD;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
     margin-right: 0.3rem;
@@ -40,6 +40,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.25rem 1rem;
+    color: #BFD5CD;
 }
 
 .categoryItem:hover {
@@ -48,19 +49,18 @@
 
 .categoryItemButton {
     border-radius: 0 8px 8px 0;
-    background-color: gold;
+    background-color: #BFD5CD;
     cursor: pointer;
 }
 
 .categoryItemButton:hover {
-    background: linear-gradient(90deg, gold 0%, #1a1a1a 100%);
+    background-color: #133453;
     color: floralwhite;
     border: 0;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid #133453;
 }
 
 .clearFiltersButton {
-    background-color: gold;
     cursor: pointer;
     border-radius: 8px;
     height: 2rem;
@@ -74,10 +74,12 @@
     width: 17rem;
     background-color: transparent;
     color: white;
+    border: 1px solid #BFD5CD
 }
 
 .categorySelector option {
-    background-color: #ad820a;
+    background-color: #BFD5CD;
+    color: #133453;
 }
 
 .discountSelector {
@@ -85,10 +87,12 @@
     width: 5rem;
     background-color: transparent;
     color: white;
+    border: 1px solid #BFD5CD
 }
 
 .discountSelector option {
-    background-color: #ad820a;
+    background-color: #BFD5CD;
+    color: #133453;
 }
 
 .search {
@@ -108,19 +112,21 @@
     align-items: center;
     color: floralwhite;
     cursor: pointer;
+    border-right: 1px dotted #489075;
+    padding-right: 1rem;
 }
 
 @keyframes blink {
     0% {
-        background-color: gold;
-        color: #1a1a1a;
+        background-color: #133453;
+        color: #489075;
     }
     50% {
-        background-color: #1a1a1a;
-        color: gold;
+        background-color: #489075;
+        color: #133453;
     }
     100% {
-        background-color: gold;
-        color: #1a1a1a;
+        background-color: #133453;
+        color: #489075;
     }
 }
