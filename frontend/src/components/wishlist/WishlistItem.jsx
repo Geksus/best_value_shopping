@@ -1,17 +1,13 @@
 import '../../styles/wishlist.css'
+import WishlistSummary from './WishlistSummary.jsx'
 
-export default function WishlistItem({ item, deleteFromWishlist }) {
+export default function WishlistItem({
+    item,
+    deleteFromWishlist,
+    totals,
+    setTotals,
+}) {
     const imgFetchUrl = import.meta.env.VITE_IMG_URL_PREFIX
-
-    function calculatePricePerRatio(price, ratio) {
-        if (ratio.endsWith('кг')) {
-            return (price / ratio.slice(0, -2)).toFixed(2)
-        }
-        if (ratio.endsWith('г')) {
-            return (price / (ratio.slice(0, -1) / 1000)).toFixed(2)
-        }
-        return false
-    }
 
     return (
         <>
@@ -21,23 +17,15 @@ export default function WishlistItem({ item, deleteFromWishlist }) {
                     <div className="wishlistItem-info">
                         <div className="wishlistItem-title">{item.title}</div>
                         <div className="wishlistItem-price">
-                            {item.displayPrice} - {item.displayRatio}{' '}
-                            {calculatePricePerRatio(
-                                item.displayPrice,
-                                item.ratio
-                            ) && (
-                                <span>
-                                    {': '}
-                                    {calculatePricePerRatio(
-                                        item.displayPrice,
-                                        item.displayRatio
-                                    )}
-                                    /{item.ratio}
-                                </span>
-                            )}
+                            {item.displayPrice} грн. / {item.displayRatio}
                         </div>
                     </div>
                 </div>
+                <WishlistSummary
+                    item={item}
+                    totals={totals}
+                    setTotals={setTotals}
+                />
                 <button
                     className="wishlistRemoveButton"
                     onClick={() => deleteFromWishlist(item.id)}

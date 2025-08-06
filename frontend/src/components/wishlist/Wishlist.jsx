@@ -5,6 +5,7 @@ import WishlistItem from './WishlistItem.jsx'
 
 export default function Wishlist() {
     const [items, setItems] = useState([])
+    const [totals, setTotals] = useState({})
 
     async function getWishlist() {
         try {
@@ -35,8 +36,18 @@ export default function Wishlist() {
                             key={item.id}
                             item={item}
                             deleteFromWishlist={deleteFromWishlist}
+                            totals={totals}
+                            setTotals={setTotals}
                         />
                     ))}
+                <div>
+                    <span>
+                        {Object.values(totals)
+                            .map((a) => parseFloat(a))
+                            .reduce((a, b) => a + b, 0)
+                            .toFixed(2)}
+                    </span>
+                </div>
             </div>
         </div>
     )
