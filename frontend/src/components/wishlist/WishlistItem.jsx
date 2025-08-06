@@ -38,7 +38,12 @@ export default function WishlistItem({ item, deleteFromWishlist }) {
                         </div>
                     </div>
                 </div>
-                <button onClick={() => deleteFromWishlist(item.id)}>X</button>
+                <button
+                    className="wishlistRemoveButton"
+                    onClick={() => deleteFromWishlist(item.id)}
+                >
+                    X
+                </button>
             </div>
         </>
     )

@@ -27,15 +27,17 @@ export default function Wishlist() {
     }, [])
 
     return (
-        <div className="wishlist">
-            {items.length > 0 &&
-                items.map((item) => (
-                    <WishlistItem
-                        key={item.id}
-                        item={item}
-                        deleteFromWishlist={deleteFromWishlist}
-                    />
-                ))}
+        <div className="container">
+            <div className="wishlist">
+                {items.length > 0 &&
+                    items.map((item) => (
+                        <WishlistItem
+                            key={item.id}
+                            item={item}
+                            deleteFromWishlist={deleteFromWishlist}
+                        />
+                    ))}
+            </div>
         </div>
     )
 }
